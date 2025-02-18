@@ -1,23 +1,19 @@
 import { useState } from "react";
 const Counter =()=>{
-   const [counter,setCounter] =  useState(()=>{
-    console.log("Hello");
-    return 10;  //It will call only once and state will be set only once
+   const [counterState,setCounterState] =  useState(()=>{
+      return {counter:10};
    });
 
    function incrementCounter(){
-    setCounter(counter + 1);
+    setCounterState((prevstate)=>{
+        return {counter:prevstate.counter + 1};
+    });
    }
 
    function decrementCounter(){
-    setCounter((prevstate)=>{
-        return prevstate - 1;
+    setCounterState((prevstate)=>{
+        return {counter:prevstate.counter - 1};
     });
-
-    setCounter((prevstate)=>{
-        return prevstate - 1;
-    });
-
    }
 
 
@@ -29,7 +25,7 @@ const Counter =()=>{
             <button className="btn btn-danger m-1" onClick={decrementCounter}>-1</button>
             <span className="h4">
               Counter: &nbsp;
-              <span className="text-success">{counter}</span>
+              <span className="text-success">{counterState.counter}</span>
             </span>
         </div>
     );
